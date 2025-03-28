@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -24,7 +25,7 @@ export function AuthForm({
           id="email"
           name="email"
           className="bg-muted text-md md:text-sm border-none"
-          type="email"
+          type="text"
           placeholder="user@acme.com"
           autoComplete="email"
           required

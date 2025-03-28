@@ -22,6 +22,9 @@ export default function Page() {
     },
   );
 
+  console.log("state", state);
+  
+
   useEffect(() => {
     if (state.status === "failed") {
       toast.error("Invalid credentials!");

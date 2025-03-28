@@ -7,6 +7,7 @@ import {
 } from "ai";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import hash from "object-hash";
 
 import { Chat } from "@/db/schema";
 
@@ -136,3 +137,8 @@ export function getTitleFromChat(chat: Chat) {
 
   return firstMessage.content;
 }
+
+export const hashValue = (input: any) => {
+  return hash(input, { algorithm: "md5" });
+};
+

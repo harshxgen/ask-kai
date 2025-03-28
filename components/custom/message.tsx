@@ -2,19 +2,21 @@
 
 import { Attachment, ToolInvocation } from "ai";
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 import { BotIcon, UserIcon } from "./icons";
 import { Markdown } from "./markdown";
 import { PreviewAttachment } from "./preview-attachment";
 import { Weather } from "./weather";
-import { AuthorizePayment } from "../flights/authorize-payment";
-import { DisplayBoardingPass } from "../flights/boarding-pass";
-import { CreateReservation } from "../flights/create-reservation";
-import { FlightStatus } from "../flights/flight-status";
-import { ListFlights } from "../flights/list-flights";
-import { SelectSeats } from "../flights/select-seats";
-import { VerifyPayment } from "../flights/verify-payment";
+import { AuthorizePayment } from "../application/authorize-payment";
+import { DisplayBoardingPass } from "../application/boarding-pass";
+import { CreateReservation } from "../application/create-reservation";
+import { FlightStatus } from "../application/flight-status";
+import { ListFlights } from "../application/list-flights";
+import { SelectSeats } from "../application/select-seats";
+import { VerifyPayment } from "../application/verify-payment";
+import { ValidateNic } from "../application/validate-nic";
+import { ListApplications } from "../application/list-applications";
 
 export const Message = ({
   chatId,
@@ -74,6 +76,14 @@ export const Message = ({
                       <DisplayBoardingPass boardingPass={result} />
                     ) : toolName === "verifyPayment" ? (
                       <VerifyPayment result={result} />
+                    ) : toolName === "enterNIC" ? (
+                      <ValidateNic chatId={chatId} />
+                    ) : toolName === "getApplicationsByNIC" ? (
+                      <ListApplications chatId={chatId} results={result} />
+                    ) : toolName === "getApplicationById" ? (
+                      <div>
+                        <Markdown>{result.text}</Markdown>
+                      </div>
                     ) : (
                       <div>{JSON.stringify(result, null, 2)}</div>
                     )}
@@ -96,6 +106,8 @@ export const Message = ({
                       <AuthorizePayment />
                     ) : toolName === "displayBoardingPass" ? (
                       <DisplayBoardingPass />
+                    ) : toolName === "enterNIC" ? (
+                      <ValidateNic chatId={chatId} />
                     ) : null}
                   </div>
                 );
